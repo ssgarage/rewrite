@@ -7,6 +7,7 @@ import org.ocpsoft.rewrite.config.ConfigurationBuilder;
 import org.ocpsoft.rewrite.config.proxy.Proxy;
 import org.ocpsoft.rewrite.servlet.config.HttpConfigurationProvider;
 import org.ocpsoft.rewrite.servlet.config.Path;
+import org.ocpsoft.rewrite.servlet.config.SendStatus;
 
 public class ProxyRewriteConfiguration extends HttpConfigurationProvider
 {
@@ -17,7 +18,8 @@ public class ProxyRewriteConfiguration extends HttpConfigurationProvider
       return ConfigurationBuilder.begin()
                .addRule()
                .when(Path.matches("/proxy"))
-               .perform(Proxy.to("http://google.com:80/"));
+               .perform(Proxy.to("http://google.com:80/")
+                        .and(SendStatus.code(200)));
    }
 
    @Override

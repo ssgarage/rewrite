@@ -1,21 +1,16 @@
-Tuckey URLRewriteFilter integration for Rewrite
+HTTP Proxy and ReverseProxy config for Rewrite
 ===============================================
 
-A (for now) simple integration that loads the standard WEB-INF/urlrewrite.xml file for use in Rewrite
+A simple configuration that can be used to proxy web traffic to and from an alternate destination.
 
 How to use
 ==========
-
-
- * Remove URLRewriteFilter from your web.xml and POM.
-
- * Leave your existing /WEB-INF/urlrewrite.xml [configuration file](http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/3.2/index.html#configuration) in place.
 
  * Include OCPSoft Rewrite in your application's POM file:
 
         <dependency>
            <groupId>org.ocpsoft.rewrite</groupId>
-           <artifactId>rewrite-config-tuckey</artifactId>
+           <artifactId>rewrite-config-proxy</artifactId>
            <version>${rewrite.version}</version>
         </dependency>
 
@@ -25,5 +20,3 @@ TODO's
 ======
 
  * Integrate with mod_rewrite style configuration. 
-
- * Support Tuckey.org init parameters and configuration reloading.
