@@ -83,6 +83,28 @@ public class JoinEncodingConfigurationTest extends RewriteTest
       assertThat(responseContent, containsString("getParameter('param') = foo bar"));
    }
 
+   @Test
+   public void testJoinSupportsSingleCurlyBrace() throws Exception
+   {
+      HttpAction<HttpGet> action = get("/encoding/foo%7Bbar");
+      assertEquals(200, action.getResponse().getStatusLine().getStatusCode());
+
+      String responseContent = action.getResponseContent();
+      assertThat(responseContent, containsString("getRequestPath() = " + getContextPath() + "/encoding.html"));
+      assertThat(responseContent, containsString("getParameter('param') = foo{bar"));
+   }
+
+   @Test
+   public void testJoinSupportsCurlyBraceGroup() throws Exception
+   {
+      HttpAction<HttpGet> action = get("/encoding/foo%7Bbar%7D");
+      assertEquals(200, action.getResponse().getStatusLine().getStatusCode());
+
+      String responseContent = action.getResponseContent();
+      assertThat(responseContent, containsString("getRequestPath() = " + getContextPath() + "/encoding.html"));
+      assertThat(responseContent, containsString("getParameter('param') = foo{bar}"));
+   }
+
    /**
     * Ampersands don't have to be encoded in the path segment (rfc2396, section 3.3). Make sure this works when
     * transforming it into a query parameter.
