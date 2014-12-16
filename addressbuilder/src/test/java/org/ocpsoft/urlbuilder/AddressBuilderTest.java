@@ -283,4 +283,11 @@ public class AddressBuilderTest
       assertEquals("#", AddressBuilder.create("#").toString());
    }
 
+   @Test
+   public void shouldCreateAddressFromUrlWithCurlyBrace()
+   {
+      Address address = AddressBuilder.create("http://localhost/somepath/%7Bsomething%7D");
+      assertEquals("/somepath/{something}", address.getPath());
+   }
+
 }

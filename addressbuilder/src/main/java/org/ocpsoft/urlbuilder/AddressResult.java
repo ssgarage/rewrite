@@ -181,11 +181,14 @@ class AddressResult implements Address
             String name = group.getCaptured().toString();
 
             Parameter parameter = parameters.get(name);
-            if (parameter == null || !parameter.hasValues())
-               throw new IllegalStateException("No parameter [" + name + "] was set in the pattern [" + sequence
-                        + "]. Call address.set(\"" + name + "\", value); or remove the parameter from the pattern.");
-
-            result.append(parameter.getValueAsPathParam(0));
+            if (parameter == null || !parameter.hasValues()) {
+               result.append(CaptureType.BRACE.getBegin())
+                        .append(name)
+                        .append(CaptureType.BRACE.getEnd());
+            }
+            else {
+               result.append(parameter.getValueAsPathParam(0));
+            }
 
             break;
 
