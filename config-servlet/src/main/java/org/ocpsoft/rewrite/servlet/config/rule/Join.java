@@ -164,7 +164,7 @@ public class Join implements Rule, JoinPath, Parameterized
          this.outboundConditionCache = resourcePath;
          for (String name : parameters) {
             Query parameter = Query.parameterExists(name);
-            outboundConditionCache = outboundConditionCache.and(parameter);
+            outboundConditionCache = parameter.and(outboundConditionCache);
          }
       }
 
